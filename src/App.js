@@ -8,8 +8,6 @@ import Basket from './Basket';
 export default class App extends Component {
 
 	render() {
-		const addToWish = (e) => {
-		};
 		return (
 			<div className="App-header">
 				<Router>
@@ -20,7 +18,7 @@ export default class App extends Component {
 
 						<Link to="/basket/">Basket</Link>
 					</div>
-					<Route path="/" exact component={() => <Home addToWish={addToWish} />} />
+					<Route path="/" exact component={Home} />
 					<Route path="/wishlist/" component={WishList} />
 					<Route path="/basket/" component={Basket} />
 				</Router>
