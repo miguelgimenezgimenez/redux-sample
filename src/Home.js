@@ -1,11 +1,15 @@
 import React, { Component } from "react"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
+import { Snackbar } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 export default class Home extends Component {
   state = {
     inputValue: "",
-    presents: []
+    presents: [],
+    open:false
   }
 
   handleChange = e => {
@@ -24,7 +28,20 @@ export default class Home extends Component {
   addToWishList = item => {
     const { addToWish } = this.props
     addToWish(item)
+    this.setState({open:true})
+
   }
+
+
+
+   handleClose=(event, reason)=> {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+  this.setState({open:false})
+  }
+
 
   render() {
     return (
@@ -59,6 +76,35 @@ export default class Home extends Component {
             </Button>
           </div>
         ))}
+
+      <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">Added to WishList
+          </span>}
+          action={[
+            <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
+              UNDO
+            </Button>,
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+
+              onClick={this.handleClose}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
       </div>
     )
   }

@@ -38,10 +38,9 @@ a:visited {
 }
 .product-container {
   display: flex;
-  width: 400px;
   margin: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 @keyframes App-logo-spin {
   from {
