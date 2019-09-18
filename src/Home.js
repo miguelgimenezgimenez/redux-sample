@@ -48,24 +48,22 @@ class Home extends Component {
 					margin="normal"
 					variant="outlined"
 				/>
-				{products ||
-					[].map((product) => (
-						<div className="product-container" key={product}>
-							<span style={{ marginRight: 30, width: 290 }}>{product}</span>
-							<Button
-								onClick={() => this.addToWishList(product)}
-								variant="contained"
-								style={{ marginRight: 20 }}
-								color="primary"
-							>
-								Add to WishList
-							</Button>
-							<Button onClick={this.addToBasket} variant="contained" color="secondary">
-								Add to basket
-							</Button>
-						</div>
-					))}
-
+				{products.map((product) => (
+					<div className="product-container" key={product}>
+						<span style={{ marginRight: 30, width: 290 }}>{product}</span>
+						<Button
+							onClick={() => this.addToWishList(product)}
+							variant="contained"
+							style={{ marginRight: 20 }}
+							color="primary"
+						>
+							Add to WishList
+						</Button>
+						<Button onClick={this.addToBasket} variant="contained" color="secondary">
+							Add to basket
+						</Button>
+					</div>
+				))}
 				<Snackbar
 					anchorOrigin={{
 						vertical: 'bottom',
