@@ -48,7 +48,7 @@ class Home extends Component {
 					margin="normal"
 					variant="outlined"
 				/>
-				{products.map((product) => (
+				{products||[].map((product) => (
 					<div className="product-container" key={product}>
 						<span style={{ marginRight: 30, width: 290 }}>{product}</span>
 						<Button
