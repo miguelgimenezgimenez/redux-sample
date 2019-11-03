@@ -5,7 +5,6 @@ import { Snackbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { connect } from 'react-redux';
-import { addProduct } from './actions';
 
 class Home extends Component {
 	state = {
@@ -19,12 +18,13 @@ class Home extends Component {
 
 	handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
-			this.props.addProduct(this.state.inputValue);
+
 		}
 	};
-	addToBasket = (item) => {};
+	addToBasket = (product) => {
+
+	};
 	addToWishList = (product) => {
-		this.props.addProduct(product);
 	};
 
 	handleClose = (event, reason) => {
@@ -59,7 +59,7 @@ class Home extends Component {
 						>
 							Add to WishList
 						</Button>
-						<Button onClick={this.addToBasket} variant="contained" color="secondary">
+						<Button onClick={()=>this.addToBasket(product)} variant="contained" color="secondary">
 							Add to basket
 						</Button>
 					</div>
@@ -90,11 +90,9 @@ class Home extends Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	products: state.products
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addProduct: (product) => dispatch(addProduct(product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
