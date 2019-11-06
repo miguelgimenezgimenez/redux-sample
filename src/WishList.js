@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
+
+import Button from '@material-ui/core/Button';
 
 class Wishlist extends Component {
 	removeFromWishlist = (product) => {};
 
 	render() {
+		const products = this.props.products;
 		return (
 			<div style={{ textAlign: 'center' }}>
 				<h1>Wishlist</h1>
 
-				{this.props.wishList ||
+				{this.props.products ||
 					[].map((product) => (
 						<div className="product-container" key={product}>
 							<span style={{ marginRight: 30 }}>{product}</span>
@@ -27,6 +29,7 @@ class Wishlist extends Component {
 		);
 	}
 }
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => {
+	return { products: state.product };
+};
 export default connect(mapStateToProps)(Wishlist);

@@ -5,27 +5,29 @@ import { Snackbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { connect } from 'react-redux';
-
+import { setProduct } from './actions';
 class Home extends Component {
 	state = {
 		inputValue: '',
-		open: false
+		open: false,
+		products: []
 	};
 
 	handleChange = (e) => {
 		this.setState({ inputValue: e.target.value });
 	};
 
+	addProduct = (product) => {
+		this.props.setProduct(product);
+	};
+
 	handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
-
+			// DISPATCH SET_PRODUCT
 		}
 	};
-	addToBasket = (product) => {
-
-	};
-	addToWishList = (product) => {
-	};
+	addToBasket = (product) => {};
+	addToWishList = (product) => {};
 
 	handleClose = (event, reason) => {
 		if (reason === 'clickaway') {
@@ -35,7 +37,8 @@ class Home extends Component {
 	};
 
 	render() {
-		const { products } = this.props;
+		const { products } = this.state;
+		console.log(this.props);
 		return (
 			<div style={{ textAlign: 'center' }}>
 				<h1>Home</h1>
@@ -48,22 +51,23 @@ class Home extends Component {
 					margin="normal"
 					variant="outlined"
 				/>
-				{products||[].map((product) => (
-					<div className="product-container" key={product}>
-						<span style={{ marginRight: 30, width: 290 }}>{product}</span>
-						<Button
-							onClick={() => this.addToWishList(product)}
-							variant="contained"
-							style={{ marginRight: 20 }}
-							color="primary"
-						>
-							Add to WishList
-						</Button>
-						<Button onClick={()=>this.addToBasket(product)} variant="contained" color="secondary">
-							Add to basket
-						</Button>
-					</div>
-				))}
+				{products ||
+					[].map((product) => (
+						<div key={product}>
+							<span style={{ marginRight: 30, width: 290 }}>{product}</span>
+							<Button
+								onClick={() => this.addToWishList(product)}
+								variant="contained"
+								style={{ marginRight: 20 }}
+								color="primary"
+							>
+								Add to WishList
+							</Button>
+							<Button onClick={() => this.addToBasket(product)} variant="contained" color="secondary">
+								Add to basket
+							</Button>
+						</div>
+					))}
 				<Snackbar
 					anchorOrigin={{
 						vertical: 'bottom',
@@ -90,9 +94,14 @@ class Home extends Component {
 	}
 }
 const mapStateToProps = (state) => ({
+	products: state
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	setProduct: (product) => {
+		console.log(dispatch, 'dusp');
+		dispatch(setProduct(product));
+	}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
