@@ -94,12 +94,5 @@ class Home extends Component {
 		);
 	}
 }
-const mapStateToProps = (state) => ({
-	products: state.products
-});
 
-const mapDispatchToProps = (dispatch) => ({
-	addProduct: (product) => dispatch(addProduct(product))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default (Home);

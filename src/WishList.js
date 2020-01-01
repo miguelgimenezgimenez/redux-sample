@@ -22,7 +22,5 @@ class Wishlist extends Component {
 		);
 	}
 }
-const mapStateToProps = (state) => ({
-	products: state.products
-});
-export default connect(mapStateToProps)(Wishlist);
+
+export default (Wishlist);
