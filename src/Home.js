@@ -19,13 +19,16 @@ class Home extends Component {
 	};
 
 	addProduct = (product) => {
-		this.props.setProduct(product);
+		this.setState({
+			products:[...this.state.products, product]
+		})
+		// this.props.setProduct(product);
 	};
 
 	handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
 			console.log(this.state.inputValue);
-			this.props.addProduct(this.state.inputValue);
+			this.addProduct(this.state.inputValue);
 		}
 	};
 	addToBasket = (product) => {};
@@ -53,7 +56,7 @@ class Home extends Component {
 					margin="normal"
 					variant="outlined"
 				/>
-				{products.map((product) => (
+				{this.state.products.map((product) => (
 					<div className="product-container" key={product}>
 						<span style={{ marginRight: 30, width: 290 }}>{product}</span>
 						<Button

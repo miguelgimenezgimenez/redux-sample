@@ -10,7 +10,7 @@ class Wishlist extends Component {
 			<div style={{ textAlign: 'center' }}>
 				<h1>Wishlist</h1>
 
-				{this.props.products.map((product) => (
+				{[].map((product) => (
 					<div className="product-container" key={product}>
 						<span style={{ marginRight: 30 }}>{product}</span>
 						<Button onClick={() => this.removeFromWishlist(product)} variant="contained" color="secondary">
