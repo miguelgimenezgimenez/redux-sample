@@ -5,6 +5,7 @@ import { Snackbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { connect } from 'react-redux';
+import { addProduct } from './actions';
 
 class Home extends Component {
 	state = {
@@ -18,14 +19,12 @@ class Home extends Component {
 
 	handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
-
+			console.log(this.state.inputValue);
+			this.props.addProduct(this.state.inputValue);
 		}
 	};
-	addToBasket = (product) => {
-
-	};
-	addToWishList = (product) => {
-	};
+	addToBasket = (product) => {};
+	addToWishList = (product) => {};
 
 	handleClose = (event, reason) => {
 		if (reason === 'clickaway') {
@@ -36,6 +35,7 @@ class Home extends Component {
 
 	render() {
 		const { products } = this.props;
+		console.log(products);
 		return (
 			<div style={{ textAlign: 'center' }}>
 				<h1>Home</h1>
@@ -48,7 +48,7 @@ class Home extends Component {
 					margin="normal"
 					variant="outlined"
 				/>
-				{products||[].map((product) => (
+				{products.map((product) => (
 					<div className="product-container" key={product}>
 						<span style={{ marginRight: 30, width: 290 }}>{product}</span>
 						<Button
@@ -59,7 +59,7 @@ class Home extends Component {
 						>
 							Add to WishList
 						</Button>
-						<Button onClick={()=>this.addToBasket(product)} variant="contained" color="secondary">
+						<Button onClick={() => this.addToBasket(product)} variant="contained" color="secondary">
 							Add to basket
 						</Button>
 					</div>
@@ -90,9 +90,11 @@ class Home extends Component {
 	}
 }
 const mapStateToProps = (state) => ({
+	products: state.products
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	addProduct: (product) => dispatch(addProduct(product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
