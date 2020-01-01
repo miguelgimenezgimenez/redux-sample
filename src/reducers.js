@@ -1,11 +1,8 @@
 const INITIAL_STATE = {
-	products: [],
-	wishlist: ['platsetation'],
-	users: ['miguel']
+	products: []
 };
 
 export default (state = INITIAL_STATE, action) => {
-	console.log(state);
 	switch (action.type) {
 		case 'SET_PRODUCT':
 			return {
@@ -14,6 +11,6 @@ export default (state = INITIAL_STATE, action) => {
 			};
 
 		default:
-			break;
+			return state;
 	}
 };

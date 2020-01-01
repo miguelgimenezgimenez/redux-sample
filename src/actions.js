@@ -1,10 +1,6 @@
-const SET_PRODUCT = 'SET_PRODUCT';
-
-export const setProduct = (product) => {
+export const addProduct = (product) => {
 	return {
-		type: SET_PRODUCT,
+		type: 'SET_PRODUCT',
 		product
 	};
 };
-
-export default () => {};

@@ -5,7 +5,8 @@ import { Snackbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { connect } from 'react-redux';
-import { setProduct } from './actions';
+import { addProduct } from './actions';
+
 class Home extends Component {
 	state = {
 		inputValue: '',
@@ -23,7 +24,8 @@ class Home extends Component {
 
 	handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
-			// DISPATCH SET_PRODUCT
+			console.log(this.state.inputValue);
+			this.props.addProduct(this.state.inputValue);
 		}
 	};
 	addToBasket = (product) => {};
@@ -37,8 +39,8 @@ class Home extends Component {
 	};
 
 	render() {
-		const { products } = this.state;
-		console.log(this.props);
+		const { products } = this.props;
+		console.log(products);
 		return (
 			<div style={{ textAlign: 'center' }}>
 				<h1>Home</h1>
@@ -51,23 +53,22 @@ class Home extends Component {
 					margin="normal"
 					variant="outlined"
 				/>
-				{products ||
-					[].map((product) => (
-						<div key={product}>
-							<span style={{ marginRight: 30, width: 290 }}>{product}</span>
-							<Button
-								onClick={() => this.addToWishList(product)}
-								variant="contained"
-								style={{ marginRight: 20 }}
-								color="primary"
-							>
-								Add to WishList
-							</Button>
-							<Button onClick={() => this.addToBasket(product)} variant="contained" color="secondary">
-								Add to basket
-							</Button>
-						</div>
-					))}
+				{products.map((product) => (
+					<div className="product-container" key={product}>
+						<span style={{ marginRight: 30, width: 290 }}>{product}</span>
+						<Button
+							onClick={() => this.addToWishList(product)}
+							variant="contained"
+							style={{ marginRight: 20 }}
+							color="primary"
+						>
+							Add to WishList
+						</Button>
+						<Button onClick={() => this.addToBasket(product)} variant="contained" color="secondary">
+							Add to basket
+						</Button>
+					</div>
+				))}
 				<Snackbar
 					anchorOrigin={{
 						vertical: 'bottom',
@@ -94,14 +95,11 @@ class Home extends Component {
 	}
 }
 const mapStateToProps = (state) => ({
-	products: state
+	products: state.products
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	setProduct: (product) => {
-		console.log(dispatch, 'dusp');
-		dispatch(setProduct(product));
-	}
+	addProduct: (product) => dispatch(addProduct(product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
