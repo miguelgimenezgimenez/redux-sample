@@ -5,7 +5,7 @@ import { Snackbar } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { connect } from 'react-redux';
-import { addProduct } from './actions';
+import { addToWishlistAction } from './actions';
 
 class Home extends Component {
 	state = {
@@ -20,19 +20,22 @@ class Home extends Component {
 
 	addProduct = (product) => {
 		this.setState({
-			products:[...this.state.products, product]
+			products: [...this.state.products, product]
 		})
 		// this.props.setProduct(product);
 	};
 
 	handleKeyDown = (e) => {
 		if (e.key === 'Enter') {
-			console.log(this.state.inputValue);
 			this.addProduct(this.state.inputValue);
 		}
 	};
-	addToBasket = (product) => {};
-	addToWishList = (product) => {};
+	addToBasket = (product) => { };
+
+	addToWishList = (wish) => {
+		console.log('add to wishlist','wish')
+		this.props.addWishToStore(wish)
+	};
 
 	handleClose = (event, reason) => {
 		if (reason === 'clickaway') {
@@ -43,7 +46,7 @@ class Home extends Component {
 
 	render() {
 		const { products } = this.props;
-		console.log(products);
+
 		return (
 			<div style={{ textAlign: 'center' }}>
 				<h1>Home</h1>
@@ -98,4 +101,11 @@ class Home extends Component {
 	}
 }
 
-export default (Home);
+const mapDispatchToProps = (dispatch) => {
+	
+	return {
+		addWishToStore: (wish) => {dispatch(addToWishlistAction(wish))},
+
+	}
+}
+export default connect(null, mapDispatchToProps)(Home);
